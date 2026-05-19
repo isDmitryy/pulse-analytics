@@ -106,6 +106,6 @@ npx serve .
 | HTML5 | Разметка |
 | CSS3 (Custom Properties) | Стили и темизация |
 | Vanilla JavaScript (ES6+) | Логика и отрисовка |
-| Canvas API | Графики (линейный, столбчатый, круговой) |
+| Canvas | Графики (линейный, столбчатый, круговой) |
 
 Без jQuery, без React, без любых npm-пакетов.
