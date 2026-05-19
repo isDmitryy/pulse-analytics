@@ -1,0 +1,34 @@
+@import url(variables.css);
+@import url(sidebar.css);
+@import url(main-wrapper.css);
+@import url(header.css);
+@import url(date-filter-pills.css);
+@import url(kpi-cards.css);
+@import url(chart-grid.css);
+@import url(donut-chart-row.css);
+@import url(tooltip.css);
+@import url(table.css);
+@import url(responsive.css);
+@import url(overlay.css);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+}

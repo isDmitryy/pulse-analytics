@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="icons/android-chrome-512x512.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="icons/android-chrome-192x192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="180x180"
+      href="icons/apple-touch-icon.png"
+    />
+
+    <title>Pulse Analytics</title>
+    <script defer src="scripts/activity-table.js"></script>
+    <script defer src="scripts/bar-chart.js"></script>
+    <script defer src="scripts/canvas-helpers.js"></script>
+    <script defer src="scripts/date-display.js"></script>
+    <script defer src="scripts/date-generation.js"></script>
+    <script defer src="scripts/date-pills.js"></script>
+    <script defer src="scripts/donut-chart.js"></script>
+    <script defer src="scripts/init-resize.js"></script>
+    <script defer src="scripts/kpi-update.js"></script>
+    <script defer src="scripts/line-chart.js"></script>
+    <script defer src="scripts/sidebar-toggle.js"></script>
+    <script defer src="scripts/tooltip-logic.js"></script>
+    <script defer src="scripts/utils.js"></script>
+  </head>
+  <body>
+    <!-- Sidebar overlay for mobile -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 18h4v-8H3v8zm7 0h4V6h-4v12zm7 0h4v-5h-4v5z" />
+          </svg>
+        </div>
+        Pulse Analytics
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-label">Main</div>
+        <div class="nav-item active">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          Dashboard
+        </div>
+        <div class="nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+          </svg>
+          Users
+          <span class="nav-badge">2.4k</span>
+        </div>
+        <div class="nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="12" y1="1" x2="12" y2="23" />
+            <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+          </svg>
+          Revenue
+        </div>
+
+        <div class="nav-label">Analytics</div>
+        <div class="nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          Events
+        </div>
+        <div class="nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+            />
+          </svg>
+          Funnels
+          <span class="nav-badge">New</span>
+        </div>
+
+        <div class="nav-label">System</div>
+        <div class="nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"
+            />
+          </svg>
+          Settings
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AD</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Alex Donovan</div>
+            <div class="sidebar-user-role">Admin</div>
+          </div>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            style="
+              width: 14px;
+              height: 14px;
+              color: var(--muted);
+              flex-shrink: 0;
+            "
+          >
+            <circle cx="12" cy="5" r="1" />
+            <circle cx="12" cy="12" r="1" />
+            <circle cx="12" cy="19" r="1" />
+          </svg>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main wrapper -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">
+        <button class="header-hamburger" onclick="toggleSidebar()">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <div>
+          <div class="header-title">Dashboard Overview</div>
+        </div>
+        <div class="header-spacer"></div>
+        <div class="date-display" id="dateDisplay"></div>
+        <div class="header-icon-btn">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"
+            />
+          </svg>
+          <span class="notif-dot"></span>
+        </div>
+        <div class="header-icon-btn">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </div>
+        <div class="header-avatar">AD</div>
+      </header>
+
+      <!-- Content -->
+      <main class="content">
+        <!-- Section header with date pills -->
+        <div class="section-header" style="margin-bottom: 20px">
+          <div>
+            <div class="section-title">Analytics Overview</div>
+            <div class="section-subtitle">
+              Track your key metrics and performance indicators
+            </div>
+          </div>
+          <div class="date-pills">
+            <div class="pill" data-range="7">Last 7 days</div>
+            <div class="pill" data-range="30">Last 30 days</div>
+            <div class="pill" data-range="90">Last 90 days</div>
+            <div class="pill active" data-range="365">Last Year</div>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+          <!-- MAU -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-label">Monthly Active Users</div>
+              <div
+                class="kpi-icon"
+                style="background: rgba(99, 102, 241, 0.15)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6366f1"
+                  stroke-width="2"
+                >
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-mau">24,800</div>
+            <div class="kpi-trend up">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+              <span id="kpi-mau-trend">+12.3%</span>
+              <span class="kpi-trend-sub">vs last period</span>
+            </div>
+          </div>
+
+          <!-- MRR -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-label">Monthly Recurring Revenue</div>
+              <div class="kpi-icon" style="background: rgba(34, 197, 94, 0.12)">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#22c55e"
+                  stroke-width="2"
+                >
+                  <line x1="12" y1="1" x2="12" y2="23" />
+                  <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-mrr">$48,200</div>
+            <div class="kpi-trend up">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+              <span id="kpi-mrr-trend">+8.7%</span>
+              <span class="kpi-trend-sub">vs last period</span>
+            </div>
+          </div>
+
+          <!-- Churn -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-label">Churn Rate</div>
+              <div class="kpi-icon" style="background: rgba(239, 68, 68, 0.1)">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#ef4444"
+                  stroke-width="2"
+                >
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-churn">2.1%</div>
+            <div class="kpi-trend down">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                style="transform: rotate(180deg)"
+              >
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+              <span id="kpi-churn-trend">-0.4%</span>
+              <span class="kpi-trend-sub">improvement</span>
+            </div>
+          </div>
+
+          <!-- Avg Session -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-label">Avg Session Duration</div>
+              <div
+                class="kpi-icon"
+                style="background: rgba(245, 158, 11, 0.12)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#f59e0b"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-session">4m 32s</div>
+            <div class="kpi-trend up">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+              <span id="kpi-session-trend">+0.8 min</span>
+              <span class="kpi-trend-sub">vs last period</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts row 1 -->
+        <div class="chart-grid">
+          <!-- Line Chart: User Growth -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">User Growth</div>
+                <div class="chart-sub">Active users over time</div>
+              </div>
+              <div class="chart-badge" id="lineGrowthBadge">+18.4% growth</div>
+            </div>
+            <canvas id="lineChart" height="220"></canvas>
+          </div>
+
+          <!-- Bar Chart: Monthly Revenue -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">Monthly Revenue</div>
+                <div class="chart-sub">Revenue breakdown by period</div>
+              </div>
+              <div class="chart-badge" id="revenueBadge">$48.2k this month</div>
+            </div>
+            <canvas id="barChart" height="220"></canvas>
+          </div>
+
+          <!-- Donut Chart: Traffic Sources -->
+          <div class="chart-card wide">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">Traffic Sources</div>
+                <div class="chart-sub">Distribution by acquisition channel</div>
+              </div>
+            </div>
+            <div class="donut-row">
+              <div class="donut-canvas-wrap">
+                <canvas id="donutChart" width="200" height="200"></canvas>
+                <div class="donut-center">
+                  <div class="donut-center-val">100%</div>
+                  <div class="donut-center-lbl">Total</div>
+                </div>
+              </div>
+              <div class="donut-legend" id="donutLegend"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Table -->
+        <div class="bottom-grid">
+          <div class="table-card">
+            <div class="table-header-row">
+              <div>
+                <div class="chart-title">Recent Activity</div>
+                <div class="chart-sub">Latest user actions on the platform</div>
+              </div>
+              <div class="table-search">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                Search activity...
+              </div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Action</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="activityTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="chart-tooltip" id="chartTooltip">
+      <div class="tooltip-label" id="tooltipLabel"></div>
+      <div class="tooltip-val" id="tooltipVal"></div>
+    </div>
+  </body>
+</html>

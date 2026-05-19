@@ -1,0 +1,29 @@
+.chart-tooltip {
+  position: fixed;
+  background: #1e2130;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  color: var(--text);
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: none;
+  white-space: nowrap;
+}
+.tooltip-label {
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+.tooltip-val {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
